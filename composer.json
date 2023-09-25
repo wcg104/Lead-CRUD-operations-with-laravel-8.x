@@ -24,11 +24,13 @@
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
+            "Database\\Seeders\\": "database/seeders/",
+            "Wcg104\\Lead\\": "packages/wcg104/lead/src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
+            "Wcg104\\Lead\\": "packages/wcg104/lead/src/",
             "Tests\\": "tests/"
         }
     },
