@@ -2,6 +2,7 @@
 
 namespace  Wcg104\Lead\Http\Requests\Lead;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateFormRequest extends FormRequest
@@ -25,7 +26,6 @@ class UpdateFormRequest extends FormRequest
     {
         return [
             'name' => 'required|max:50',
-            'email' => 'required|email|max:200|unique:leads,email,'.$id.',id',
             'address1' => 'required|max:250',
             'address2' => 'required|max:250',
             'city' => 'required',
@@ -33,7 +33,14 @@ class UpdateFormRequest extends FormRequest
             'country' =>'required',
             'cellphone' => 'required',
             'phone_ext' => 'required',
-            'phone' => 'required'
+            'phone' => 'required',
+            'status' => 'required|in:active,pending,cancelled,blocked,archived',
+            'email' => [
+                'required','email','max:200',
+                Rule::unique('leads')->where(function ($query) use($id){
+                    return $query->whereNot('email', $this->input('email'))->where('is_deleted',0)->whereNot('id',$id);
+                }),
+            ],
             
         ];
     }

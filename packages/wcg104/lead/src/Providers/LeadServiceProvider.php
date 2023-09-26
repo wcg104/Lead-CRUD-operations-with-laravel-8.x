@@ -7,9 +7,19 @@
 
         public function boot()
         {
-          $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
-          $this->loadViewsFrom(__DIR__.'/../resources/views', 'test');
-          $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+         
+          $this->publishes([
+            __DIR__.'/../database/migrations/' => database_path('migrations')
+          ], 'lead');
+              $this->publishes([
+                __DIR__.'/../Http/Controllers/' => app_path('Http/Controllers')
+            ], 'lead');
+            $this->publishes([
+              __DIR__.'/../Models/' => app_path('Models')
+          ], 'lead');
+          $this->publishes([
+            __DIR__.'/../Http/Requests' => app_path('Http/Requests')
+        ], 'lead');
         }
    }
 ?>

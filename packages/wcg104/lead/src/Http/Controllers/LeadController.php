@@ -17,7 +17,7 @@ class LeadController
      */
     public function index()
     {
-        $lead = Lead::get();
+        $lead = Lead::where('is_deleted',0)->get();
         $response = [
             'type' => 'success',
             'code' => 200,
@@ -66,7 +66,7 @@ class LeadController
      */
     public function show($id)
     {
-        $data = Lead::where('id',$id)->firstOrFail();
+        $data = Lead::where('is_deleted',0)->where('id',$id)->firstOrFail();
         
         $response = [
             'type' => 'success',
@@ -99,7 +99,7 @@ class LeadController
             ];
             return response()->json($response, 422);
         }
-        $data =  Lead::where('id',$id)->firstOrFail();
+        $data =  Lead::where('is_deleted',0)->where('id',$id)->firstOrFail();
         $data->update(request()->input());
         $response = [
             'type' => 'success',
@@ -118,9 +118,12 @@ class LeadController
      */
     public function destroy($id)
     {
-        $remove =  Lead::destroy($id);
+        $remove =  Lead::where('is_deleted',0)->where('id',$id)->first();
         if($remove)
         {
+            $remove->is_deleted = 1;
+            $remove->save();
+            
             $response = [
                 'type' => 'success',
                 'code' => 200,

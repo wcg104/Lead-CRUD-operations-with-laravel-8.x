@@ -3,6 +3,7 @@
 namespace  Wcg104\Lead\Http\Requests\Lead;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreFormRequest extends FormRequest
 {
@@ -26,7 +27,6 @@ class StoreFormRequest extends FormRequest
     {
         return [
             'name' => 'required|max:50',
-            'email' => 'required|unique:leads|email|max:200',
             'password' => 'required|max:50',
             'cellphone' => 'required',
             'phone_ext' => 'required',
@@ -35,7 +35,14 @@ class StoreFormRequest extends FormRequest
             'address2' => 'required|max:250',
             'city' => 'required',
             'state' => 'required',
-            'country' =>'required'
+            'country' =>'required',
+            'status' => 'required|in:active,pending,cancelled,blocked,archived',
+            'email' => [
+                'required','email','max:200',
+                Rule::unique('leads')->where(function ($query){
+                    return $query->whereNot('email', $this->input('email'))->where('is_deleted',0);
+                }),
+            ],
         ];
     }
 }

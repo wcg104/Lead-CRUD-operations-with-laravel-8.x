@@ -26,12 +26,13 @@ return new class extends Migration
             $table->string('state');
             $table->string('country');
             $table->string('password');
-            $table->enum('status',['active','in_active'])->default('active');        
+            $table->enum('status',['active','pending','cancelled','blocked','archived'])->default('active');        
             $table->timestamp('created');
             $table->timestamp('updated');
             $table->boolean('is_deleted',[0,1])->default(0)->comment(" 0 = not deleted and 1 = deleted");
             
         });
+
     }
 
     /**
