@@ -21,8 +21,12 @@ php artisan vendor:publish --tag=lead
 
 Usage
 -----
-To use CURD API operation for lead module.
+To use CURD API operation for lead module Run below command.
 
+Run Migration
+```
+php artisan migrate
+```
 Add resource route in route file
 ```php
 // To use api resource add this in route and change name of lead according to your requirement
