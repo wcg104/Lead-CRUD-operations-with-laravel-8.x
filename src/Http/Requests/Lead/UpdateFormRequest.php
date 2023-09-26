@@ -4,6 +4,8 @@ namespace  App\Http\Requests\Lead;
 
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class UpdateFormRequest extends FormRequest
 {
@@ -44,5 +46,20 @@ class UpdateFormRequest extends FormRequest
             
         ];
     }
+    protected function failedValidation(Validator $validator)
+    {
+        $response = [
+            'type' => 'error',
+            'code' => 422,
+            'message' => "Server Validation Fail",
+            'errors' =>$validator->errors()
+        ];
+
+        /**
+         * Return response data in json formate
+         */
+        throw new HttpResponseException(response()->json($response, 422));
+    }
+
 
 }

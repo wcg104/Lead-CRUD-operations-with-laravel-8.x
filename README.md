@@ -1,5 +1,5 @@
 
-Laravel CURD operation for lead
+Laravel CRUD operation for lead
 ======
 
 
@@ -21,7 +21,7 @@ php artisan vendor:publish --tag=lead
 
 Usage
 -----
-To use CURD API operation for lead module Run below command.
+To use CRUD API operation for lead module Run below command.
 
 Run Migration
 ```

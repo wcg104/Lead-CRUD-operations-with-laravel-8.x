@@ -33,23 +33,10 @@ class LeadController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreFormRequest $request)
     {
         
-        $leadRequest = new StoreFormRequest();
-        $validator = Validator::make(request()->all(), $leadRequest->rules(), $leadRequest->messages());
-
-        if ($validator->fails()) {
-
-            $response = [
-                'type' => 'error',
-                'code' => 422,
-                'message' => "Server validation fail",
-                'errors' => $validator->errors()
-            ];
-            return response()->json($response, 422);
-        }
-        $response = [
+              $response = [
             'type' => 'success',
             'code' => 200,
             'message' => "Created",
@@ -84,21 +71,9 @@ class LeadController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateFormRequest $request, $id)
     {
-        $leadRequest = new UpdateFormRequest();
-        $validator = Validator::make(request()->all(), $leadRequest->rules($id), $leadRequest->messages());
-
-        if ($validator->fails()) {
-
-            $response = [
-                'type' => 'error',
-                'code' => 422,
-                'message' => "Server validation fail",
-                'errors' => $validator->errors()
-            ];
-            return response()->json($response, 422);
-        }
+    
         $data =  Lead::where('is_deleted',0)->where('id',$id)->firstOrFail();
         $data->update(request()->input());
         $response = [

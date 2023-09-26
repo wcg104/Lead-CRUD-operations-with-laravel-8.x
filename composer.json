@@ -1,6 +1,6 @@
 {
   "name": "wcg104/lead",
-  "description": "CURD operation package for lead in laravel",
+  "description": "CRUD operation package for lead in laravel",
   "license": "MIT",
   "authors": [
       {
