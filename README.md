@@ -7,7 +7,7 @@ Laravel CURD operation for lead
 Installation
 -----
 
-Run a command for Laravel 9,
+Run a command,
 
 ```
 composer require wcg104/lead
