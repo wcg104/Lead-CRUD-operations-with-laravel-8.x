@@ -13,7 +13,16 @@
           "Wcg104\\Lead\\": "src/"
       }
   },
+  "minimum-stability": "dev",
   "require": {
     "php": "^8.0"
-  }
+  },
+  "extra": {
+    "laravel": {
+        "providers": [
+            "Wcg104\\Lead\\Providers\\LeadServiceProvider"
+        ]
+    }
 }
+}
+
