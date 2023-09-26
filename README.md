@@ -23,9 +23,8 @@ Usage
 -----
 To use CURD API operation for lead module.
 
+Add resource route in route file
 ```php
-use Illuminate\Support\Facades\Route;
-
 // To use api resource add this in route and change name of lead according to your requirement
 
 Route::apiResource('lead', LeadController::class);
