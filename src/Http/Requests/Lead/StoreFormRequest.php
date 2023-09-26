@@ -42,7 +42,7 @@ class StoreFormRequest extends FormRequest
             'email' => [
                 'required','email','max:200',
                 Rule::unique('leads')->where(function ($query){
-                    return $query->whereNot('email', $this->input('email'))->where('is_deleted',0);
+                    return $query->where('email', $this->input('email'))->where('is_deleted',0);
                 }),
             ],
         ];

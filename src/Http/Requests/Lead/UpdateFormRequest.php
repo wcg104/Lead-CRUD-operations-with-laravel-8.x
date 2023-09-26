@@ -39,9 +39,12 @@ class UpdateFormRequest extends FormRequest
             'status' => 'required|in:active,pending,cancelled,blocked,archived',
             'email' => [
                 'required','email','max:200',
-                Rule::unique('leads')->where(function ($query) use($id){
-                    return $query->whereNot('email', $this->input('email'))->where('is_deleted',0)->whereNot('id',$id);
-                }),
+                'email' => [
+                    'required','email','max:200',
+                    Rule::unique('leads')->where(function ($query){
+                        return $query->where('email', $this->input('email'))->where('is_deleted',0);
+                    })->ignore($this->lead),
+                ],
             ],
             
         ];
