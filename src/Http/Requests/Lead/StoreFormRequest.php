@@ -1,6 +1,6 @@
 <?php
 
-namespace  Wcg104\Lead\Http\Requests\Lead;
+namespace  App\Http\Requests\Lead;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;

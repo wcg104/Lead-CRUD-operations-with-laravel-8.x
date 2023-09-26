@@ -1,11 +1,11 @@
 <?php
 
-namespace Wcg104\Lead\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Wcg104\Lead\Models\Lead;
-use Wcg104\Lead\Http\Requests\Lead\StoreFormRequest;
-use Wcg104\Lead\Http\Requests\Lead\UpdateFormRequest;
+use App\Models\Lead;
+use App\Http\Requests\Lead\StoreFormRequest;
+use App\Http\Requests\Lead\UpdateFormRequest;
 use Illuminate\Support\Facades\Validator;
 
 class LeadController
