@@ -2,6 +2,7 @@
 
 namespace  App\Http\Requests\Lead;
 
+use App\Models\Lead;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Contracts\Validation\Validator;
@@ -27,25 +28,39 @@ class StoreFormRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'name' => 'required|max:50',
             'password' => 'required|max:50',
             'cellphone' => 'required',
             'phone_ext' => 'required',
-            'phone' => 'required',
+            'phone' => 'required|numeric|max:15',
             'address1' => 'required|max:250',
             'address2' => 'required|max:250',
             'city' => 'required',
             'state' => 'required',
             'country' =>'required',
-            'status' => 'required|in:active,pending,cancelled,blocked,archived',
-            'email' => [
+            'status' => 'required|in:active,pending,cancelled,blocked,archived'
+        ];
+
+        if (Lead::UNIQUE_FIELD == 'email') {
+            $rules['email'] = [
                 'required','email','max:200',
                 Rule::unique('leads')->where(function ($query){
                     return $query->where('email', $this->input('email'))->where('is_deleted',0);
                 }),
-            ],
-        ];
+            ];
+            $rules['phone'] = 'required|numeric';
+        }else{
+            $rules['phone'] = [
+                'required','numeric',
+                Rule::unique('leads')->where(function ($query){
+                    return $query->where('phone', $this->input('phone'))->where('is_deleted',0);
+                }),
+            ];
+            $rules['email'] = 'required|email|max:200';
+        }
+
+        return $rules;
     }
 
     protected function failedValidation(Validator $validator)

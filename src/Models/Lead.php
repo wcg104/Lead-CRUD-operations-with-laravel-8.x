@@ -14,7 +14,11 @@ class Lead extends Model
     public $incrementing = false;
 
     protected $fillable = ['name', 'email','password','cellphone','phone_ext','phone','address1','address2','city','state','country','status','created','updated','is_deleted'];
- /**
+    
+    // unique field is either email or phon. According to requirement change the value of variable.
+    const UNIQUE_FIELD = 'email';
+
+    /**
      * The name of the "created at" column.
      *
      * @var string
