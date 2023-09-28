@@ -29,9 +29,8 @@ class UpdateFormRequest extends FormRequest
     {        $rules = [
             'name' => 'required|max:50',
             'password' => 'required|max:50',
-            'cellphone' => 'required',
-            'phone_ext' => 'required',
-            'phone' => 'required|numeric|max:15',
+            'cellphone' => 'required|max:15',
+            'phone_ext' => 'required|max:5',
             'address1' => 'required|max:250',
             'address2' => 'required|max:250',
             'city' => 'required',
@@ -42,20 +41,20 @@ class UpdateFormRequest extends FormRequest
 
         if (Lead::UNIQUE_FIELD == 'email') {
             $rules['email'] = [
-                'required','email','max:200',
+                'required','email','max:150',
                 Rule::unique('leads')->where(function ($query){
                     return $query->where('email', $this->input('email'))->where('is_deleted',0);
                 })->ignore($this->lead),
             ];
-            $rules['phone'] = 'required|numeric';
+            $rules['phone'] = 'required|max:15';
         }else{
             $rules['phone'] = [
-                'required','numeric',
+                'required','max:15',
                 Rule::unique('leads')->where(function ($query){
                     return $query->where('phone', $this->input('phone'))->where('is_deleted',0);
                 })->ignore($this->lead),
             ];
-            $rules['email'] = 'required|email|max:200';
+            $rules['email'] = 'required|email|max:150';
         }
 
         return $rules;

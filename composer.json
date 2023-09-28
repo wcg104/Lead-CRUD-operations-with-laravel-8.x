@@ -2,6 +2,11 @@
   "name": "wcg104/lead",
   "description": "CRUD operation package for lead in laravel",
   "license": "MIT",
+  "keywords": [
+    "laravel",
+    "php",
+    "CRUD"
+],
   "authors": [
       {
           "name": "Nima Patel",
@@ -15,7 +20,8 @@
   },
   "minimum-stability": "dev",
   "require": {
-    "php": "^8.0"
+    "php": "^8.0",
+    "laravel/framework": "^9.0"
   },
   "extra": {
     "laravel": {

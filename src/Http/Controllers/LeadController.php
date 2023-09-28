@@ -17,7 +17,7 @@ class LeadController
      */
     public function index()
     {
-        $lead = Lead::where('is_deleted',0)->get();
+        $lead = Lead::where('is_deleted',0)->paginate(10);
         $response = [
             'type' => 'success',
             'code' => 200,
@@ -108,10 +108,10 @@ class LeadController
         }
         $response = [
             'type' => 'error',
-            'code' => 500,
+            'code' => 404,
             'message' => "Deleted Fail",
         ];
-        return response()->json($response, 500);
+        return response()->json($response, 404);
     }
        
 }
