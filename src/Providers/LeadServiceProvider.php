@@ -21,7 +21,7 @@
                 __DIR__.'/../Http/Requests' => app_path('Http/Requests')
               ], 'lead');
               $this->publishes([
-                __DIR__.'/../test/Feature' => test_path('Feature')
+                __DIR__.'/../tests/Feature' => base_path('tests/Feature')
               ], 'lead');
         }
    }
