@@ -1,5 +1,5 @@
 
-Laravel CRUD operation for lead
+Laravel CRUD operation with testing
 ======
 
 [![Total Downloads](https://poser.pugx.org/wcg104/lead/downloads)](https://packagist.org/packages/wcg104/lead)  [![License](https://poser.pugx.org/wcg104/lead/license)](https://packagist.org/packages/wcg104/lead)
