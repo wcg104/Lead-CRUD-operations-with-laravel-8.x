@@ -55,4 +55,4 @@ php artisan test
 ```
 License
 -----
-This package is licensed under the `MIT` License. Please see the [License File] (https://github.com/wcg104/lead/blob/master/LICENSE) for more details.
+This package is licensed under the `MIT` License. Please see the [License File](https://github.com/wcg104/lead/blob/master/LICENSE) for more details.
