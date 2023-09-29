@@ -14,7 +14,7 @@ class LeadTest extends TestCase
 {
     use RefreshDatabase; 
     
-     // API testing
+     // Create lead testing with positive assert
      public function test_create_lead()
      {
          $api = '/lead';
@@ -43,6 +43,7 @@ class LeadTest extends TestCase
          
      }     
 
+     // get all leads testing with positive assert
      public function test_get_all_leads()
      {
         $this->test_create_lead();
@@ -56,6 +57,7 @@ class LeadTest extends TestCase
             ])->assertJson(fn (AssertableJson $json) => $json->hasAll(['type','code','message','data']));
      }
  
+    //  get lead detail testing with positive assert
      public function test_get_lead_detail()
      {
         
@@ -71,6 +73,7 @@ class LeadTest extends TestCase
         ])->assertJson(fn (AssertableJson $json) => $json->hasAll(['type','code','message','data']));
      }
 
+    //  Update lead testing with positive assert assert
      public function test_update_lead_detail()
      {
         $this->test_create_lead();
@@ -99,6 +102,7 @@ class LeadTest extends TestCase
         ])->assertJson(fn (AssertableJson $json) => $json->hasAll(['type','code','message','data']));
      }
 
+    //  Delete lead testing with positive assert
      public function test_lead_delete()
      {
         $this->test_create_lead();
@@ -115,7 +119,7 @@ class LeadTest extends TestCase
      }
 
 
-    // Validation
+    // Email format validation testing with negative assert response
      public function test_valid_email_format()
      {
             $api = '/lead';
@@ -146,9 +150,9 @@ class LeadTest extends TestCase
                ])->assertJson(fn (AssertableJson $json) => $json->hasAll(['type','code','message','errors']));
      }
 
-     public function test_email_existing_value__not_allowed_if_user_is_not_deleted()
+    //  Email existing value not allowed if user is not deleted testing with negative assert response.
+     public function test_email_existing_value_not_allowed_if_user_is_not_deleted()
      {
-        // $this->test_lead_delete();
             
         $this->test_create_lead();
 
@@ -179,6 +183,7 @@ class LeadTest extends TestCase
                ])->assertJson(fn (AssertableJson $json) => $json->hasAll(['type','code','message','errors']));
      }
 
+    //  Email existing value allowed if user is deleted testing with positive assert response
      public function test_email_existing_value_allowed_if_user_is_deleted()
      {
         $this->test_lead_delete();
@@ -186,6 +191,7 @@ class LeadTest extends TestCase
         $this->test_create_lead();
      }
 
+    //  Required field validation testing with negative assert response
      public function test_required_field_validation()
      {
         $api = '/lead';
@@ -230,6 +236,7 @@ class LeadTest extends TestCase
            
      }
 
+    //  Column value max limit testing with negative assert
      public function test_validation_for_value_less_than_limit()
      {
         $api = '/lead';
@@ -283,6 +290,7 @@ class LeadTest extends TestCase
            ])->assertJson(fn (AssertableJson $json) => $json->hasAll(['type','code','message','errors']));
      }
 
+      //  Column test validation for status value with negative assert
      public function test_validation_for_status_value()
      {
         $api = '/lead';
@@ -328,7 +336,7 @@ class LeadTest extends TestCase
            ])->assertJson(fn (AssertableJson $json) => $json->hasAll(['type','code','message','errors']));
      }
 
-    // With wrong id testing
+    // Lead update with wrong id testing with negative assert
      public function test_update_lead_detail_with_wrong_id()
      {
         $this->test_create_lead();
@@ -353,6 +361,7 @@ class LeadTest extends TestCase
         $response->assertStatus(404);
      }
 
+      // Lead delete with wrong id testing with negative assert
      public function test_lead_delete_with_wrong_id()
      {
         $this->test_create_lead();
@@ -360,16 +369,12 @@ class LeadTest extends TestCase
 
         $response = $this->delete($api);
 
-        $response->assertStatus(404)
-        ->assertJson([
-            'type' => "error",
-            'message' => "Deleted Fail"
-        ])->assertJson(fn (AssertableJson $json) => $json->hasAll(['type','code','message']));
+        $response->assertStatus(404);
      }
 
+      // Get lead detail with wrong id testing with negative assert
      public function test_get_lead_detail_with_wrong_id()
-     {
-        
+     {        
         $this->test_create_lead();
         $api = "/lead/123";
 

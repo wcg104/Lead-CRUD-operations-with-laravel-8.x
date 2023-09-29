@@ -35,13 +35,23 @@ class LeadController
      */
     public function store(StoreFormRequest $request)
     {        
-              $response = [
-            'type' => 'success',
-            'code' => 200,
-            'message' => "Created",
-            'data' =>  Lead::create(request()->input())
-        ];
-        return response()->json($response, 200);
+        try {
+            $response = [
+                'type' => 'success',
+                'code' => 200,
+                'message' => "Created",
+                'data' =>  Lead::create(request()->input())
+            ];
+            return response()->json($response, 200);
+        } catch (\Throwable $th) {
+           
+            $response = [
+                'type' => 'error',
+                'code' => 500,
+                'message' =>  $th->getMessage()
+            ];
+            return response()->json($response, 500);
+        }
     }
 
     /**
@@ -70,15 +80,23 @@ class LeadController
      */
     public function update(UpdateFormRequest $request, Lead $lead)
     {
-    
-        $lead->update(request()->input());
-        $response = [
-            'type' => 'success',
-            'code' => 200,
-            'message' => "Updated",
-            'data' => $lead
-        ];
-        return response()->json($response, 200);
+        try {
+            $lead->update(request()->input());
+            $response = [
+                'type' => 'success',
+                'code' => 200,
+                'message' => "Updated",
+                'data' => $lead
+            ];
+            return response()->json($response, 200);
+        } catch (\Throwable $th) {
+            $response = [
+                'type' => 'error',
+                'code' => 500,
+                'message' =>  $th->getMessage()
+            ];
+            return response()->json($response, 500);
+        }
     }
 
     /**
@@ -89,6 +107,7 @@ class LeadController
      */
     public function destroy(Lead $lead)
     {
+        try {
             $lead->is_deleted = 1;
             $lead->save();
             
@@ -98,6 +117,14 @@ class LeadController
                 'message' => "Deleted Successfully",
             ];
             return response()->json($response, 200);
+        } catch (\Throwable $th) {
+            $response = [
+                'type' => 'error',
+                'code' => 500,
+                'message' =>  $th->getMessage()
+            ];
+            return response()->json($response, 500);
+        }
         
     }
        

@@ -23,6 +23,9 @@
               $this->publishes([
                 __DIR__.'/../tests/Feature' => base_path('tests/Feature')
               ], 'lead');
+              $this->publishes([
+                __DIR__.'/../Models/Scopes' => app_path('Models/Scopes')
+              ], 'lead');
         }
    }
 ?>
