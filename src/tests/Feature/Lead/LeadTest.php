@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Lead;
 
 use App\Models\Lead;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
