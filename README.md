@@ -34,6 +34,16 @@ Add resource route in route file
 
 Route::apiResource('lead', LeadController::class);
 ```
+
+Added global scope for the is_deleted field. Because of this scope deleted its work like soft delete for is_deleted column. It's store true or false value. If you want to see delete record then add withoutGlobalScope in your query.
+```php
+// Remove one scope
+Lead::withoutGlobalScope(AgeScope::class)->get();
+
+// Remove all of the global scopes...
+Lead::withoutGlobalScopes()->get();
+```
+
 For testing, need to set up testing environment.
 Update database detail in phpunit.xml file
 ```php
