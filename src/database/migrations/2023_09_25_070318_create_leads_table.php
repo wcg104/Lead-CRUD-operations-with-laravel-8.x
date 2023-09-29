@@ -19,12 +19,12 @@ return new class extends Migration
             $table->string('email');
             $table->string('cellphone')->nullable();
             $table->string('phone_ext')->nullable();
-            $table->string('phone')->nullable();
+            $table->string('phone');
             $table->string('address1');
-            $table->string('address2');
-            $table->string('city');
-            $table->string('state');
-            $table->string('country');
+            $table->string('address2')->nullable();
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
+            $table->string('country')->nullable();
             $table->string('password');
             $table->enum('status',['active','pending','cancelled','blocked','archived'])->default('active');        
             $table->timestamp('created');

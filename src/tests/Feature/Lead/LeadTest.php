@@ -21,7 +21,7 @@ class LeadTest extends TestCase
    
          $data = [
              "name" => "test",
-             "email" => "webcode@gmail.com",
+             "email" => "jhondoe@test.com",
              "cellphone" => "2553433222",
              "phone_ext" => "+91",
              "phone" => 1425,
@@ -79,7 +79,7 @@ class LeadTest extends TestCase
 
         $data = [
             "name" => "test",
-            "email" => "webcodegenie@gmail.com",
+            "email" => "jhon@test.com",
             "cellphone" => "2553433222",
             "phone_ext" => "+91",
             "phone" => 125848687,
@@ -122,7 +122,7 @@ class LeadTest extends TestCase
       
             $data = [
                 "name" => "test",
-                "email" => "ghfghfghgh",
+                "email" => "jhon",
                 "cellphone" => "2553433222",
                 "phone_ext" => "+91",
                 "phone" => 1425,
@@ -155,7 +155,7 @@ class LeadTest extends TestCase
             $api = '/lead';
             $data = [
                 "name" => "test",
-                "email" => "webcode@gmail.com",
+                "email" => "jhondoe@test.com",
                 "cellphone" => "2553433222",
                 "phone_ext" => "+91",
                 "phone" => 1425,
@@ -192,28 +192,16 @@ class LeadTest extends TestCase
         $data = [
             "name" => "",
             "email" => "",
-            "cellphone" => "",
-            "phone_ext" => "",
             "phone" => "",
             "address1" => "",
-            "address2" => "",
-            "city" => "",
-            "state" => "",
-            "country" => "",
             "password" => "",
             "status" => ""
         ];
 
         $errors =  ["name" => ["The name field is required."],
         "password" => ["The password field is required."],
-        "cellphone" => ["The cellphone field is required."],
-        "phone_ext" => ["The phone ext field is required."],
         "phone" => ["The phone field is required."],
         "address1" => ["The address1 field is required."],
-        "address2" => ["The address2 field is required."],
-        "city" => ["The city field is required."],
-        "state" => ["The state field is required."],
-        "country" => ["The country field is required."],
         "status" => ["The status field is required."]];
 
 
@@ -247,15 +235,15 @@ class LeadTest extends TestCase
         $api = '/lead';
         $data = [
             "name" => "testestttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt",
-            "email" => "testttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt@webcodegenie.com",
+            "email" => "testttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt@test.com",
             "cellphone" => "1234567897894561233215648",
             "phone_ext" => "123445555",
             "phone" => 1234586758942635846,
             "address1" => "testttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt",
             "address2" => "testtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt",
-            "city" => "dgfdfg",
-            "state" => "dfg",
-            "country" => "dfg",
+            "city" => "testtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttyyyyyyyy",
+            "state" => "testtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttyyyyyyyy",
+            "country" => "testtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttyyyyyyyy",
             "password" => "testtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttdfgggggggggggggggggggggggggggggggggggggggggggggggggggggggtttttttttttttttt",
             "status" => "active"
         ];
@@ -266,6 +254,9 @@ class LeadTest extends TestCase
                             "phone_ext" => ["The phone ext must not be greater than 5 characters."],                            
                             "address1" => ["The address1 must not be greater than 250 characters."],
                             "address2" => ["The address2 must not be greater than 250 characters."],
+                            "city" => ["The city must not be greater than 150 characters."],
+                            "state" => ["The state must not be greater than 150 characters."],
+                            "country" => ["The country must not be greater than 150 characters."],
                             "email" => ["The email must not be greater than 150 characters."],
                             "phone" => ["The phone must not be greater than 15 characters."]];
         $response = $this->post($api, $data);
@@ -298,7 +289,7 @@ class LeadTest extends TestCase
       
         $data = [
             "name" => "test",
-            "email" => "test@gmail.com",
+            "email" => "jhondoe@test.com",
             "cellphone" => "2553433222",
             "phone_ext" => "+91",
             "phone" => 1425,
@@ -345,7 +336,7 @@ class LeadTest extends TestCase
 
         $data = [
             "name" => "test",
-            "email" => "webcodegenie@gmail.com",
+            "email" => "jhondoee@test.com",
             "cellphone" => "2553433222",
             "phone_ext" => "+91",
             "phone" => 125848687,

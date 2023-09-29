@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Scopes\SoftDeleteOfIsDeleteScope;
 
 class Lead extends Model
 {
@@ -32,6 +33,17 @@ class Lead extends Model
      */
     const UPDATED_AT = 'updated';
 
+
+
+      /**
+     *  add global scope to do not show deleted record
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new SoftDeleteOfIsDeleteScope);
+    }
 
     public function setPasswordAttribute($value)
     {

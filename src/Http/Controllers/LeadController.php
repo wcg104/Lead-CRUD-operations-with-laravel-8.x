@@ -17,7 +17,7 @@ class LeadController
      */
     public function index()
     {
-        $lead = Lead::where('is_deleted',0)->paginate(10);
+        $lead = Lead::paginate(10);
         $response = [
             'type' => 'success',
             'code' => 200,
@@ -34,8 +34,7 @@ class LeadController
      * @return \Illuminate\Http\Response
      */
     public function store(StoreFormRequest $request)
-    {
-        
+    {        
               $response = [
             'type' => 'success',
             'code' => 200,
@@ -51,15 +50,13 @@ class LeadController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        $data = Lead::where('is_deleted',0)->where('id',$id)->firstOrFail();
-        
+    public function show(Lead $lead)
+    {        
         $response = [
             'type' => 'success',
             'code' => 200,
             'message' => "data",
-            'data' =>   $data
+            'data' =>   $lead
         ];
         return response()->json($response, 200);
     }
@@ -71,16 +68,15 @@ class LeadController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateFormRequest $request, $id)
+    public function update(UpdateFormRequest $request, Lead $lead)
     {
     
-        $data =  Lead::where('is_deleted',0)->where('id',$id)->firstOrFail();
-        $data->update(request()->input());
+        $lead->update(request()->input());
         $response = [
             'type' => 'success',
             'code' => 200,
             'message' => "Updated",
-            'data' => $data
+            'data' => $lead
         ];
         return response()->json($response, 200);
     }
@@ -91,13 +87,10 @@ class LeadController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Lead $lead)
     {
-        $remove =  Lead::where('is_deleted',0)->where('id',$id)->first();
-        if($remove)
-        {
-            $remove->is_deleted = 1;
-            $remove->save();
+            $lead->is_deleted = 1;
+            $lead->save();
             
             $response = [
                 'type' => 'success',
@@ -105,13 +98,7 @@ class LeadController
                 'message' => "Deleted Successfully",
             ];
             return response()->json($response, 200);
-        }
-        $response = [
-            'type' => 'error',
-            'code' => 404,
-            'message' => "Deleted Fail",
-        ];
-        return response()->json($response, 404);
+        
     }
        
 }

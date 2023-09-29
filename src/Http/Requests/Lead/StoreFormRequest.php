@@ -31,13 +31,13 @@ class StoreFormRequest extends FormRequest
         $rules = [
             'name' => 'required|max:50',
             'password' => 'required|max:50',
-            'cellphone' => 'required|max:15',
-            'phone_ext' => 'required|max:5',
+            'cellphone' => 'max:15',
+            'phone_ext' => 'max:5',
             'address1' => 'required|max:250',
-            'address2' => 'required|max:250',
-            'city' => 'required',
-            'state' => 'required',
-            'country' =>'required',
+            'address2' => 'max:250',
+            'city' => 'max:150',
+            'state' => 'max:150',
+            'country' =>'max:150',
             'status' => 'required|in:active,pending,cancelled,blocked,archived'
         ];
 
